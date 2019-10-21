@@ -77,6 +77,16 @@ class User extends Db_object
             return FALSE;
         }
     }
+    
+    public function delete_photo()
+    {
+        if ($this->delete()) {
+            $target_path = SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->filename;
+            return unlink($target_path) ? TRUE : FALSE;
+        } else {
+            return FALSE;
+        }
+    }
 
     public function ajax_change_image($user_image, $user_id)
     {

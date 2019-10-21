@@ -5,16 +5,16 @@ if (! $session->is_signed_in()) {
     redirect('login.php');
 }
 
-$message = "";
-if (isset($_POST['submit'])) {
+$msg = "";
+if (isset($_FILES['file'])) {
     $photo = new Photo();
     $photo->title = $_POST['title'];
-    $photo->set_file($_FILES['file_uploaded']);
+    $photo->set_file($_FILES['file']);
 
     if ($photo->save_file()) {
-        $message = "Photo uploaded successfully";
+        $msg = "Photo uploaded successfully";
     } else {
-        $message = join("<br>", $photo->errors);
+        $msg = join("<br>", $photo->errors);
     }
 }
 
@@ -35,29 +35,37 @@ if (isset($_POST['submit'])) {
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Upload <!-- <small>Subheading</small> -->
+					Upload
+					<!-- <small>Subheading</small> -->
 				</h1>
-				<div class="col-md-6">
-				<?php echo $message; ?> 
+				<div class="row">
+					<div class="col-md-6">
+				<?php echo $msg; ?> 
 					<form action="upload.php" enctype="multipart/form-data"
-						method="post">
+							method="post">
 
-						<div class="form-group">
-							<input type="text" name="title" class="form-control">
-						</div>
-						<div class="form-group">
-							<input type="file" name="file_uploaded">
-						</div>
+							<div class="form-group">
+								<input type="text" name="title" class="form-control">
+							</div>
+							<div class="form-group">
+								<input type="file" name="file">
+							</div>
 
-						<input type="submit" name="submit" value="Submit" class="btn btn-primary">
-				
+							<input type="submit" name="submit" value="Submit"
+								class="btn btn-primary">
+					
+					</div>
 				</div>
 				</form>
 
 			</div>
 		</div>
 		<!-- /.row -->
-
+		<div class="row">
+			<div class="col-lg-12">
+				<form action="upload.php" class="dropzone"></form>
+			</div>
+		</div>
 	</div>
 	<!-- /.container-fluid -->
 </div>

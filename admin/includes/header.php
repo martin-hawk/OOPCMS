@@ -36,10 +36,12 @@ require_once 'init.php';
 <!-- Custom CSS -->
 <link href="css/styles.css" rel="stylesheet">
 
+<!-- Dropzone CSS -->
+<link href="css/dropzone.css" rel="stylesheet">
+
 <!-- Google Charts -->
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-
 
 </head>
 

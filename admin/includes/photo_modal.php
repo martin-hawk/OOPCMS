@@ -1,8 +1,7 @@
-<?php
-
-require_once 'init.php';
+<?php require_once 'init.php';
 
 $photos = Photo::find_all();
+
 ?>
 <div class="modal fade" id="photo-modal">
 	<div class="modal-dialog">
@@ -10,22 +9,20 @@ $photos = Photo::find_all();
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+					<span aria-hidden="true"></span>
 				</button>
 				<h4 class="modal-title">Gallery System Library</h4>
 			</div>
 			<div class="modal-body">
 				<div class="col-md-9">
 					<div class="thumbnails row">
-
-						<?php foreach ($photos as $photo) :	?>
-
+						<?php foreach($photos as $photo): ?>
 						<div class="col-xs-2">
 							<a role="checkbox" aria-checked="false" tabindex="0" id=""
 								href="#" class="thumbnail"> <img
 								class="modal_thumbnails img-responsive"
-								src="<?php echo $photo->picture_path(); ?>"
-								data="<!-- PHP LOOP HERE CODE HERE-->">
+								data="<?php echo $photo->id; ?>"
+								src="<?php echo $photo->picture_path(); ?>">
 							</a>
 							<div class="photo-id hidden"></div>
 						</div>
@@ -33,6 +30,7 @@ $photos = Photo::find_all();
 						<?php endforeach; ?>
 
 					</div>
+
 				</div>
 				<!--col-md-9 -->
 

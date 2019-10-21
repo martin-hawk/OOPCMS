@@ -24,8 +24,10 @@ $photos = Photo::find_all();
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					Photos <!-- <small>Subheading</small> -->
+					Photos
+					<!-- <small>Subheading</small> -->
 				</h1>
+				<p class="bg-success"><?php echo $message; ?></p>
 				<div class="col-md-12">
 					<table class="table table-hover">
 						<thead>
@@ -45,7 +47,8 @@ $photos = Photo::find_all();
 									src="<?php echo $photo->picture_path(); ?>"
 									style="height: 100px;">
 									<div class="action_links">
-										<a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+										<a class="delete-link"
+											href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
 										<a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
 										<a href="../photo.php?id=<?php echo $photo->id; ?>">View</a>
 									</div></td>
@@ -55,9 +58,9 @@ $photos = Photo::find_all();
 								<td><?php echo $photo->title; ?></td>
 								<td><?php echo $photo->size; ?></td>
 								<td><?php
-                                        $comments = Comment::find_comments($photo->id);
-                                        echo '<a href="comment_photo.php?id=' . $photo->id . '">' . count($comments) . '</a>';
-                                    ?></td>
+        $comments = Comment::find_comments($photo->id);
+        echo '<a href="comment_photo.php?id=' . $photo->id . '">' . count($comments) . '</a>';
+        ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

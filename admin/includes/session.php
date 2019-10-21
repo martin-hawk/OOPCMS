@@ -16,7 +16,7 @@ class Session
         session_start();
         $this->visitors_count();
         $this->check_login();
-        $this->check_message("");
+        $this->check_message();
     }
 
     private function check_login()
@@ -40,15 +40,15 @@ class Session
         if ($user) {
             $this->user_id = $_SESSION['user_id'] = $user->id;
             $this->signed_in = TRUE;
-            
         }
     }
 
     public function logout()
     {
         unset($_SESSION['user_id']);
+        $this->user_id = "";
         unset($_SESSION['count']);
-        unset($this->user_id);
+        $this->count = 0;
         $this->signed_in = FALSE;
     }
 
@@ -61,7 +61,7 @@ class Session
         }
     }
 
-    private function check_message($param)
+    private function check_message()
     {
         if (isset($_SESSION['message'])) {
             $this->message = $_SESSION['message'];
@@ -74,13 +74,18 @@ class Session
     public function visitors_count()
     {
         if (isset($_SESSION['count'])) {
-            return $this->count = $_SESSION['count'] +1;
+            $_SESSION['count'] ++;
+            $this->count = $_SESSION['count'];
+            return $this->count;
         } else {
-            return $this->count = $_SESSION['count'] = 1;
+            $_SESSION['count'] = 1;
+            $this->count = $_SESSION['count'];
+            return $this->count;
         }
     }
 }
 
 $session = new Session();
+$message = $session->message();
 
 ?>

@@ -1,5 +1,5 @@
-<?php
-include ("includes/header.php");
+<?php ob_start(); ?>
+<?php include ("includes/header.php");
 include ("includes/photo_modal.php");
 
 if (! $session->is_signed_in()) {
@@ -21,12 +21,16 @@ if (isset($_POST['update'])) {
 
         if (empty($_FILES['user_image'])) {
             $user->save();
+            $session->message("The user has been updated");
+            redirect("users.php");
         } else {
             $user->set_file($_FILES['user_image']);
             $user->upload_photo();
             $user->save();
 
-            redirect("edit_user.php?id={$_GET['id']}");
+            // redirect("edit_user.php?id={$_GET['id']}");
+            $session->message("The user has been updated");
+            redirect("users.php");
         }
     }
 }
@@ -78,13 +82,14 @@ if (isset($_POST['update'])) {
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label> <input type="password"
-								name="password" class="form-control">
+								name="password" class="form-control"
+								value="<?php echo $user->password; ?>">
 						</div>
 						<div class="form-group">
 							<a href="delete_user.php?id=<?php echo $user->id; ?>"
-								class="btn btn-danger" id="user-id">Delete</a> <input type="submit"
-								name="update" value="Update" class="btn btn-primary pull-right"
-								value="<?php echo $user->password; ?>">
+								class="btn btn-danger" id="user-id">Delete</a> <input
+								type="submit" name="update" value="Update"
+								class="btn btn-primary pull-right">
 							<!-- Should be change to
 							check, whether the field is not empty  -->
 						</div>

@@ -14,6 +14,9 @@
 	referrerpolicy="origin"></script>
 <script src="js/scripts.js"></script>
 
+<!-- Dropzone -->
+<script src="js/dropzone.js"></script>
+
 <!-- Google Chart -->
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});

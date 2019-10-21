@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
         $session->login($user_found);
         redirect("index.php");
     } else {
-        $message = "Your username or password is incorrect.";
+        $msg = "Your username or password is incorrect.";
     }
 } else {
     $username = NULL;
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="col-md-4 col-md-offset-3">
-	<h4 class="bg-danger"><?php echo isset($message) ? $message : ''; ?></h4>
+	<h4 class="bg-danger"><?php echo isset($msg) ? $msg : ''; ?></h4>
 	<form id="login-id" action="" method="post">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text"

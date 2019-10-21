@@ -6,9 +6,11 @@ class Database
 
     public $connection;
 
+    public $db;
+
     function __construct()
     {
-        $this->open_db_connection();
+        $this->db = $this->open_db_connection();
     }
 
     public function open_db_connection()
@@ -19,11 +21,12 @@ class Database
         if ($this->connection->connect_errno) {
             die("Database connection failed" . $this->connection->connect_error);
         }
+        return $this->connection;
     }
 
     public function query($sql)
     {
-        $result = $this->connection->query($sql);
+        $result = $this->db->query($sql);
         $this->confirm_query($result);
         return $result;
     }
@@ -31,21 +34,19 @@ class Database
     private function confirm_query($result)
     {
         if (! $result) {
-            die('Query execution failed ' . $this->connection->error);
+            die('Query execution failed ' . $this->db->error);
         }
     }
 
     public function escape_string($string)
     {
-        $escaped_string = $this->connection->escape_string($string);
-        return $escaped_string;
+        return $this->db->escape_string($string);
     }
 
     public function insert_id()
     {
-        return $this->connection->insert_id;
+        return $this->db->insert_id;
     }
-    
 }
 
 $database = new Database();
